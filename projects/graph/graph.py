@@ -12,7 +12,6 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
     def add_edge(self, v1, v2):
         if v1 in self.vertices and v2 in self.vertices:
             self.vertices[v1].add(v2)
@@ -21,13 +20,30 @@ class Graph:
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty queue
+        q = Queue()
+        # Create an empty set of visited vertices
+        visited = set()
+        # Put the starting vertex in our Queue
+        q.enqueue(starting_vertex)
+        # While the queue is not empty....
+        while q.size() > 0:
+            # Dequeue the first node from the queue
+            first_node = q.dequeue()
+            # If that node has not been visted...
+            if first_node not in visited:
+                # Mark it as visited
+                visited.add(first_node)
+                # Then, put all of it's children into the queue
+                for neighbor in self.vertices[first_node]:
+                    q.enqueue(neighbor)
+                print(q.queue)
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
