@@ -29,27 +29,33 @@ class Graph:
         q = Queue()
         # Create an empty set of visited vertices
         visited = set()
-        # Put the starting vertex in our Queue
         q.enqueue(starting_vertex)
-        # While the queue is not empty....
         while q.size() > 0:
-            # Dequeue the first node from the queue
             first_node = q.dequeue()
-            # If that node has not been visted...
             if first_node not in visited:
-                # Mark it as visited
                 visited.add(first_node)
-                # Then, put all of it's children into the queue
+                print(first_node)
                 for neighbor in self.vertices[first_node]:
                     q.enqueue(neighbor)
-                print(q.queue)
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # TODO
+        s = Stack()
+        visited = set()
+        s.push(starting_vertex)
+        while s.size() > 0:
+            first = s.pop()
+            if first not in visited:
+                visited.add(first)
+                print(first)
+                for adjacent in self.vertices[first]:
+                    s.push(adjacent)
+
+
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
@@ -70,11 +76,27 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
-
-
-
-
+        # TODO
+        s = Stack()
+        visited = set()
+        path = []
+        s.push([starting_vertex])
+        while s.size() > 0:
+            path = s.pop()
+            vertex = path[-1]
+            if vertex == destination_vertex:
+                return path
+            elif vertex not in visited:
+                visited.add(vertex)
+                if destination_vertex in self.vertices[vertex]:
+                    path.append(destination_vertex)
+                    return path
+                for adj in self.vertices[vertex]:
+                    clone = path
+                    clone.append(adj)
+                    s.push(clone)
+            else:
+                print(f'Destination not in graph')
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
