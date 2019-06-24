@@ -1,4 +1,6 @@
-
+import random
+from '../graph/graph' import Graph
+print(random.randint(1, 3))
 
 class User:
     def __init__(self, name):
@@ -45,8 +47,30 @@ class SocialGraph:
         self.users = {}
         self.friendships = {}
         # !!!! IMPLEMENT ME
+        if numUsers <= avgFriendships:
+            print('You need more users than avg friends')
+            return
 
+        totalFriendships = numUsers * avgFriendships
+        users_left = numUsers
+        friendship_counts = []
+        while totalFriendships != 0 and users_left != 0:
+            this_users_friendships = random.randint(0, totalFriendships)
+            users_left -= 1
+            friendship_counts.append(this_users_friendships)
+            print(this_users_friendships)
+            totalFriendships -= this_users_friendships
+        if len(friendship_counts) < numUsers:
+            remaining_users = numUsers - len(friendship_counts)
+            for i in range(0, remaining_users):
+                friendship_counts.append(0)
+        print(friendship_counts)
+        print(len(friendship_counts))
         # Add users
+        # their names are just numbers :shrugs:
+
+        for i in range(0, numUsers):
+            addUser(i)
 
         # Create friendships
 
